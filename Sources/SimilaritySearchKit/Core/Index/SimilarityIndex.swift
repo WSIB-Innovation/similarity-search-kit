@@ -200,15 +200,12 @@ public class SimilarityIndex: Identifiable, Hashable {
         let sourcesText = combinedResultsString(results)
         let prompt =
             """
-            Given the following extracted parts of a long document and a question, create a final answer with references ("SOURCES").
-            If you don't know the answer, just say that you don't know. Don't try to make up an answer.
-            ALWAYS return a "SOURCES" part in your answer.
-
-            QUESTION: \(query)
-            =========
-            \(sourcesText)
-            =========
-            FINAL ANSWER:
+            Answer the question, using only the most relevant information from the context. 
+            QUESTION:
+             \(query)
+            CONTEXT:
+             \(sourcesText)
+		    FINAL ANSWER:
             """
         return prompt
     }
