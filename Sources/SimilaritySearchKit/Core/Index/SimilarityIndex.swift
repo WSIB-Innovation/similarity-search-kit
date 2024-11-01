@@ -209,6 +209,7 @@ public class SimilarityIndex: Identifiable, Hashable {
         return prompt
     }
 
+    @available(iOS 16.0, *)
     static func loadExistingIndex(url: URL, name: String) async -> SimilarityIndex? {
         // Initialize the index
         let index = await SimilarityIndex(name: name)
