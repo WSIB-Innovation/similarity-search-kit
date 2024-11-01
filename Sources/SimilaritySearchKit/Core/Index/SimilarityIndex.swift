@@ -208,6 +208,26 @@ public class SimilarityIndex: Identifiable, Hashable {
             """
         return prompt
     }
+
+    static func loadExistingIndex(url: URL, name: String) async -> SimilarityIndex? {
+        // Initialize the index
+        let index = await SimilarityIndex(name: name)
+        
+        // Attempt to load items from the specified file URL
+        do {
+            if let loadedItems = try index.loadIndex(fromDirectory: url.deletingLastPathComponent(), name: name) {
+                index.indexItems = loadedItems
+                print("Loaded RAG index with \(loadedItems.count) items from \(url.path)")
+                return index
+            } else {
+                print("No items found in the index file at \(url.path)")
+            }
+        } catch {
+            print("Error loading RAG index from \(url.path): \(error)")
+        }
+        
+        return nil
+    }
 }
 
 // MARK: - CRUD
