@@ -198,14 +198,12 @@ public class SimilarityIndex: Identifiable, Hashable {
 
     public class func exportLLMPrompt(query: String, results: [SearchResult]) -> String {
         let sourcesText = combinedResultsString(results)
-        let prompt =
-            """
-            Task: Use only the relevant information from the context to directly answer the question.\n
-            Question: \(query)\n
-            Context:
-            \(sourcesText)\n
-            Answer:
-            """
+        let prompt = 
+        """
+        **Question**: \(query)
+        **Context**:
+        \(sourcesText)
+        """
         return prompt
     }
 
